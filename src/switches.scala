@@ -22,13 +22,13 @@ def setCompressionLevel(level: Byte): List[String] = {
   List(s"-mx$filteredLevel")
 }
 
+def disableCompression(): List[String] = setCompressionLevel(0)
+
 def setCompression(mode: String): List[String] = {
   val modesZip = List("copy", "deflate", "deflate64", "bzip2", "lzma", "ppmd")
   val equivalentZip = List("Copy", "Deflate", "Deflate64", "BZip2", "LZMA", "PPMd") //probably not necessary
   List(s"-mm=$mode") //add checking
 }
-
-def disableCompression(): List[String] = setCompressionLevel(0)
 
 def setEncryption(mode: String): List[String] = {
   val modesZip = List("zipcrypto", "aes128", "aes192", "aes256")
@@ -37,8 +37,5 @@ def setEncryption(mode: String): List[String] = {
 }
 
 def encryptHeader(): List[String] = List("-mhe=on")
-
-def setEncryption(header: Boolean): List[String] = {
-}
 
 def deleteOriginal(): List[String] = List("-sdel")

@@ -1,2 +1,2 @@
 # scalazip
-7zip binding library written in Scala
+Scalazip is a 7zip binding library written in Scala

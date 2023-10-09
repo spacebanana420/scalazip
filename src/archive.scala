@@ -35,6 +35,19 @@ def removeFiles(name: String, files: List[String], options: List[String], exec: 
   command.!
 }
 
+def renamePaths(name: String, files: List[String], newnames: List[String], exec: String = "7z") = {
+  if files.length == newnames.length then
+    val renameList = combineNameLists(files, newnames)
+    List[String](exec, "rn", name, "-y", "-bb0", "-r") ++ renameList
+}
+
+private def combineNameLists(oldnames: List[String], newnames: List[String], combined: List[String] = List(), i: Int = 0): List[String] = {
+  if i == oldnames.length then
+    combined
+  else
+    combineNameLists(oldnames, newnames, combined :+ oldnames(i) :+ newnames(i), i+1)
+}
+
 private def hasDirs(paths: List[String], i: Int = 0): Boolean = {
   if i == paths.length then
     false
