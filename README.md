@@ -26,11 +26,11 @@ Without the working directory option, you need to specify the absolute path to t
 
 The format 7z is assumed from the file name for now.
 
-### Format support
+## Format support
 
 scalazip supports all archive formats that 7zip supports. This includes support for writing and reading 7zip, zip, tar, gzip, bzip2 files as well as reading rar, iso, and many more archive files.
 
-### Requirements & how to use
+# Requirements & how to use
 
 ## Requirements
 
