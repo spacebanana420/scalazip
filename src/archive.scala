@@ -5,6 +5,15 @@ import scala.sys.process.*
 
 //The main file that contains mostly the final functions to execute 7z with
 
+private def getMainArgs(): List[String] = List("-y", "-bso0", "-bse0", "-bsp0", "-r")
+
+private def combineNameLists(oldnames: List[String], newnames: List[String], combined: List[String] = List(), i: Int = 0): List[String] = {
+  if i == oldnames.length then
+    combined
+  else
+    combineNameLists(oldnames, newnames, combined :+ oldnames(i) :+ newnames(i), i+1)
+}
+
 def createArchive(name: String, files: List[String], options: List[String], exec: String = "7z") = { 
 //   val filesOnly = files.filter(x => File(x).isFile() == true)
 //   if filesOnly.length != 0 then
@@ -44,15 +53,6 @@ def renamePaths(name: String, files: List[String], newnames: List[String], exec:
 def checkFor7z(execpath: String = "7z"): Boolean = {
   try {List(execpath, "-y", "-bso0", "-bse0", "-bsp0").!; true}
   catch {case e: Exception => false}
-}
-
-private def getMainArgs(): List[String] = List("-y", "-bso0", "-bse0", "-bsp0", "-r")
-
-private def combineNameLists(oldnames: List[String], newnames: List[String], combined: List[String] = List(), i: Int = 0): List[String] = {
-  if i == oldnames.length then
-    combined
-  else
-    combineNameLists(oldnames, newnames, combined :+ oldnames(i) :+ newnames(i), i+1)
 }
 
 def addDir(dir: String): List[String] = {
