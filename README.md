@@ -18,7 +18,7 @@ val files = List("image.bmp", "file.txt", "vm.img")
 createArchive("archive.7z", files, options)
 ```
 
-In this example, 7z will compress the 3 files in the list which are assumed to be in ```/path/to/files```. The compression level is set to 3 (from 0 to 9), header encryption is set to true and the password is set to ```"ilovescala"```, with the default encryption being AES256.
+In this example, 7z will compress the 3 files in the list which are assumed to be in ```/path/to/files```. The compression level is set to 3 (from 0 to 9), header encryption is set to true and the password is set to ```ilovescala```, with the default encryption being AES256.
 
 ```setThreads(0)``` sets the thread count to automatic, all of your CPU threads are used.
 
