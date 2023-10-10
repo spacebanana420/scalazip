@@ -48,6 +48,21 @@ private def combineNameLists(oldnames: List[String], newnames: List[String], com
     combineNameLists(oldnames, newnames, combined :+ oldnames(i) :+ newnames(i), i+1)
 }
 
+def addDir(dir: String): List[String] = {
+    val absolute =
+      if dir != "." then
+        File(dir).getAbsolutePath()
+      else
+        File("").getAbsolutePath()
+    val dirChar =
+      if absolute.contains("/") == true then
+        '/'
+      else
+        '\\'
+    val absoluteFiles = File(dir).list().map(x => absolute + dirChar + x)
+    absoluteFiles.toList
+}
+
 // private def hasDirs(paths: List[String], i: Int = 0): Boolean = {
 //   if i == paths.length then
 //     false
@@ -66,16 +81,9 @@ def checkSupport(name: String, fmts: List[String] = List(".7z", ".bz2", ".gz", "
     checkSupport(name, fmts, i+1)
 }
 
-def addFile(name: String, files: List[String]): List[String] = {
-  if File(name).isFile() == true then
-    files :+ name
-  else
-    files
-}
-
-// def addDir(dir: String): List[String] = { //add directories too
-//   if File(dir).isDirectory == true then
-//     File(dir).list().filter(x => File(x).isFile == true)
+// def addFile(name: String, files: List[String]): List[String] = {
+//   if File(name).isFile() == true then
+//     files :+ name
 //   else
-//     List()
+//     files
 // }

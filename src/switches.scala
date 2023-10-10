@@ -1,5 +1,7 @@
 package scalazip
 
+import java.io.File
+
 def setPassword(pass: String): List[String] = {
   if pass != "" then
     List(s"-p$pass")
@@ -39,3 +41,26 @@ def setEncryption(mode: String): List[String] = {
 def encryptHeader(): List[String] = List("-mhe=on")
 
 def deleteOriginal(): List[String] = List("-sdel")
+
+def setNameMode(mode: String): List[String] = {
+  mode match {
+    case "auto" => List("-sas")
+    case "add" => List("-saa")
+    case "name" => List("-sae")
+    case _ => List("-sas")
+  }
+}
+
+def setCaseSensitive(mode: Boolean): List[String] = {
+  if mode == true then
+    List("-ssc")
+  else
+    List("-ssc-")
+}
+
+def setWorkingDirectory(dir: String): List[String] = {
+  if dir != "" && File(dir).isDirectory == true then
+    List(s"-w$dir")
+  else
+    List()
+}
