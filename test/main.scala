@@ -1,6 +1,8 @@
 package scalaziptests
 import scalazip.*
 
+//This is where I test my library, test files not included
+
 @main def main() = {
   create1()
 }

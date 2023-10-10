@@ -2,6 +2,8 @@ package scalazip
 
 import java.io.File
 
+//This part is dedicated to 7z's arguments (switches)
+
 def setPassword(pass: String): List[String] = {
   if pass != "" then
     List(s"-p$pass")
