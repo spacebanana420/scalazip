@@ -66,3 +66,10 @@ def setWorkingDirectory(dir: String): List[String] = {
   else
     List()
 }
+
+def setOutputDirectory(dir: String): List[String] = { //implement * better later
+  if dir != "" && dir != "*" && File(dir).isDirectory == true then
+    List(s"-o$dir")
+  else
+    List()
+}

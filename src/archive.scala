@@ -17,7 +17,7 @@ private def combineNameLists(oldnames: List[String], newnames: List[String], com
 def createArchive(name: String, files: List[String], options: List[String], exec: String = "7z") = { 
 //   val filesOnly = files.filter(x => File(x).isFile() == true)
 //   if filesOnly.length != 0 then
-  val command = List[String](exec, "a", name) ++ getMainArgs() ++ options ++ filesOnly
+  val command = List[String](exec, "a", name) ++ getMainArgs() ++ options ++ files //++ filesOnly
   command.!
 }
 
