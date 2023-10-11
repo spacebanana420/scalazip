@@ -23,6 +23,8 @@ def parseFileAttributes(info: List[String]): List[List[String]] = {
   getFilesInfo(info)
 }
 
+//def find file in archive
+
 private def addInfoToList(info: String, line: String = "", list: List[String] = List(), i: Int = 0): List[String] = {
   if i == info.length then
     if line != "" then //is this necessary?
@@ -38,7 +40,7 @@ private def addInfoToList(info: String, line: String = "", list: List[String] = 
 
 private def getArchiveInfo(info: List[String], newlist: List[String] = List(), i: Int = 4): List[String] = {
   if i == 11 || i == info.length then
-    val archiveAttributes = getFileAttributes(info(i-1))
+    val archiveAttributes = getFileAttributes(info(info.length-1))
     newlist ++ archiveAttributes
   else
     getArchiveInfo(info, newlist :+ getInfoValue(info(i)), i+1)
