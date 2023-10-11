@@ -38,7 +38,8 @@ private def addInfoToList(info: String, line: String = "", list: List[String] = 
 
 private def getArchiveInfo(info: List[String], newlist: List[String] = List(), i: Int = 4): List[String] = {
   if i == 11 || i == info.length then
-    newlist
+    val archiveAttributes = getFileAttributes(info(i-1))
+    newlist ++ archiveAttributes
   else
     getArchiveInfo(info, newlist :+ getInfoValue(info(i)), i+1)
 }

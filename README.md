@@ -42,3 +42,10 @@ If 7z if not in your PATH, then you need to specify a custom path to the executa
 ## How to use
 
 Download the code files in src and add them to your project however you wish. Import ```scalazip``` to use my library.
+
+## Documentation
+
+Documentation for the library's functions is located in the ```doc``` directory. The documentation is still a work-in-progress.
+
+* [Archive doc](https://github.com/spacebanana420/scalazip/doc/archive.md)
+* [Switches doc](https://github.com/spacebanana420/scalazip/doc/switches.md)
