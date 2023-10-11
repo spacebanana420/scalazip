@@ -1,7 +1,7 @@
 # scalazip
 Scalazip is a 7zip binding library written in Scala. The library uses string parsing and packs 7z's arguments into a list, for portable command execution.
 
-7zip's feature set isn't fully implemented, but the most important things are already.
+7zip's feature set isn't fully implemented, but the most important functionality and settings are ready to use.
 
 This readme is a work in progress
 
@@ -30,18 +30,16 @@ The format 7z is assumed from the file name for now.
 
 scalazip supports all archive formats that 7zip supports. This includes support for writing and reading 7zip, zip, tar, gzip, bzip2 files as well as reading rar, iso, and many more archive files.
 
-# Requirements & how to use
-
 ## Requirements
 
 * [7zip](https://www.7-zip.org/)
 * Scala 3
 
-If 7z if not in your PATH, then you need to specify a custom path to the executable
+If 7z if not in your PATH, then you need to specify a custom path to the executable (see the archive doc).
 
 ## How to use
 
-Download the code files in src and add them to your project however you wish. Import ```scalazip``` to use my library.
+Download the library files in ```src``` and add them to your project however you wish. Import ```scalazip``` to use my library.
 
 ## Documentation
 
