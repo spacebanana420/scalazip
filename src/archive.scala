@@ -44,10 +44,10 @@ def removeFiles(name: String, files: List[String], options: List[String], exec: 
   command.!
 }
 
-def renamePaths(name: String, files: List[String], newnames: List[String], exec: String = "7z") = {
+def renamePaths(name: String, files: List[String], newnames: List[String], options: List[String], exec: String = "7z") = {
   if files.length == newnames.length then
     val renameList = combineNameLists(files, newnames)
-    List[String](exec, "rn", name) ++ getMainArgs() ++ renameList
+    List[String](exec, "rn", name) ++ getMainArgs() ++ options ++ renameList
 }
 
 def checkFor7z(execpath: String = "7z"): Boolean = {

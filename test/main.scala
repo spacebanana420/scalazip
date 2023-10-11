@@ -1,11 +1,13 @@
 package scalaziptests
 import scalazip.*
 
-//This is where I test my library, test files not included
+//This is where I test my library
+//Additional files I use to test and add to archives are not included in the project
 
 @main def main() = {
   create1()
   info1()
+  renametheshit()
 }
 
 // def extract1() = {
@@ -26,6 +28,10 @@ def create1() = {
   }
 }
 
+def renametheshit () = { //does not work, can only rename files
+  println("Attempting to rename the src folder")
+  renamePaths("archive.7z", List("src/"), List("sauce/"), setPassword("ilovedoremy"))
+}
 
 def info1 () = {
   println("\nReading archive.7z\n")
