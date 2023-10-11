@@ -26,6 +26,8 @@ Without the working directory option, you need to specify the absolute path to t
 
 The format 7z is assumed from the file name for now.
 
+```options``` is a string list, containing the 7zip arguments for the respective settings. Each function used in this list returns its own string list, and so they are concatenated.
+
 ## Format support
 
 scalazip supports all archive formats that 7zip supports. This includes support for writing and reading 7zip, zip, tar, gzip, bzip2 files as well as reading rar, iso, and many more archive files.
@@ -33,7 +35,7 @@ scalazip supports all archive formats that 7zip supports. This includes support 
 ## Requirements
 
 * [7zip](https://www.7-zip.org/)
-* Scala 3
+* [Scala 3](https://scala-lang.org/)
 
 If 7z if not in your PATH, then you need to specify a custom path to the executable (see the archive doc).
 
@@ -47,3 +49,4 @@ Documentation for the library's functions is located in the ```doc``` directory.
 
 * [Archive doc](https://github.com/spacebanana420/scalazip/tree/main/doc/archive.md)
 * [Switches doc](https://github.com/spacebanana420/scalazip/tree/main/doc/switches.md)
+* [Reader doc](https://github.com/spacebanana420/scalazip/tree/main/doc/reader.md)
