@@ -47,5 +47,5 @@ Download the code files in src and add them to your project however you wish. Im
 
 Documentation for the library's functions is located in the ```doc``` directory. The documentation is still a work-in-progress.
 
-* [Archive doc](https://github.com/spacebanana420/scalazip/doc/archive.md)
-* [Switches doc](https://github.com/spacebanana420/scalazip/doc/switches.md)
+* [Archive doc](https://github.com/spacebanana420/scalazip/tree/main/doc/archive.md)
+* [Switches doc](https://github.com/spacebanana420/scalazip/tree/main/doc/switches.md)
