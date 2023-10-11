@@ -1,5 +1,5 @@
 # scalazip
-Scalazip is a 7zip binding library written in Scala. The library uses string parsing and packs 7z's arguments into a list, for portable command execution.
+Scalazip is a wrapper library for the 7zip commandline, written in Scala. The library uses string parsing and packs 7z's arguments into a list, for portable command execution.
 
 7zip's feature set isn't fully implemented, but the most important functionality and settings are ready to use.
 
