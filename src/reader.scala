@@ -23,13 +23,9 @@ def parseFileAttributes(info: List[String]): List[List[String]] = { //implement 
   getFilesInfo(info)
 }
 
-def isFileinArchive(info: List[String], name: String, filesinfo: List[List[String]] = getFilesInfo(info), i: Int = 0): Boolean = {
-  if i == filesinfo.length then
-    false
-  else if filesinfo(i)(0).contains(name) == true then
-    true
-  else
-    isFileinArchive(info, name, filesinfo, i+1)
+def isFileinArchive(info: List[String], name: String, i: Int = 0): Boolean = {
+  val filesinfo = getFilesInfo(info)
+  findFile(filesinfo, name)
 }
 
 //def hash archive (h command)
@@ -62,6 +58,15 @@ private def getFilesInfo(info: List[String], filesinfo: List[List[String]] = Lis
     getFilesInfo(info, filesinfo :+ fileinfo, List(), i+1)
   else
     getFilesInfo(info, filesinfo, fileinfo :+ getLineValue(info(i)), i+1)
+}
+
+private def findFile(filesinfo: List[List[String]], name: String, i: Int = 0): Boolean = {
+  if i == filesinfo.length then
+    false
+  else if filesinfo(i)(0).contains(name) == true then
+    true
+  else
+    findFile(filesinfo, name, i+1)
 }
 
 private def getLineValue(line: String, value: String = "", copy: Boolean = false, i: Int = 0): String = {
