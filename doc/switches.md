@@ -65,7 +65,7 @@ Deletes the original files/archive after finishing the 7zip task.
 ```scala
 def setNameMode(mode: String): List[String]
 ```
-Sets the archive name mode.
+Sets the archive name mode. If an incorrect mode is given, it will default to ```auto```
 
 The supported modes are:
 * auto

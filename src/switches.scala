@@ -54,7 +54,6 @@ def deleteOriginal(): List[String] = List("-sdel")
 
 def setNameMode(mode: String): List[String] = {
   mode match {
-    case "auto" => List("-sas")
     case "add" => List("-saa")
     case "name" => List("-sae")
     case _ => List("-sas")
