@@ -15,7 +15,7 @@ def addFiles(dir: String, exclude: List[String] = List()): List[String] = {
 private def belongsToList(name: String, exclude: List[String], i: Int = 0): Boolean = {
   if i == exclude.length then
     false
-  else if name == modes(i) then
+  else if name == exclude(i) then
     true
   else
     belongsToList(name, exclude, i+1)
