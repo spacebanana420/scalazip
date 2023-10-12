@@ -15,9 +15,7 @@ private def combineNameLists(oldnames: List[String], newnames: List[String], com
 }
 
 def createArchive(name: String, files: List[String], options: List[String], exec: String = "7z") = { 
-//   val filesOnly = files.filter(x => File(x).isFile() == true)
-//   if filesOnly.length != 0 then
-  val command = List[String](exec, "a", name) ++ getMainArgs() ++ options ++ files //++ filesOnly
+  val command = List[String](exec, "a", name) ++ getMainArgs() ++ options ++ files
   command.!
 }
 
@@ -57,20 +55,20 @@ def checkFor7z(execpath: String = "7z"): Boolean = {
   catch {case e: Exception => false}
 }
 
-def addDir(dir: String): List[String] = { //remember to remove or rework later
-    val absolute =
-      if dir != "." then
-        File(dir).getAbsolutePath()
-      else
-        File("").getAbsolutePath()
-    val dirChar =
-      if absolute.contains("/") == true then
-        '/'
-      else
-        '\\'
-    val absoluteFiles = File(dir).list().map(x => absolute + dirChar + x)
-    absoluteFiles.toList
-}
+// def addDir(dir: String): List[String] = { //remember to remove or rework later
+//     val absolute =
+//       if dir != "." then
+//         File(dir).getAbsolutePath()
+//       else
+//         File("").getAbsolutePath()
+//     val dirChar =
+//       if absolute.contains("/") == true then
+//         '/'
+//       else
+//         '\\'
+//     val absoluteFiles = File(dir).list().map(x => absolute + dirChar + x)
+//     absoluteFiles.toList
+// }
 
 // private def hasDirs(paths: List[String], i: Int = 0): Boolean = {
 //   if i == paths.length then
