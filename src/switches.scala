@@ -4,6 +4,10 @@ import java.io.File
 
 //This part is dedicated to 7z's arguments (switches)
 
+// def setFormat(fmt: String): List[String] = {
+//
+// }
+
 def setPassword(pass: String): List[String] = {
   if pass != "" then
     List(s"-p$pass")
@@ -34,7 +38,7 @@ def setCompression(mode: String): List[String] = {
   List(s"-mm=$mode") //add checking
 }
 
-def setEncryption(mode: String): List[String] = {
+def setZipEncryption(mode: String): List[String] = {
   val modesZip = List("zipcrypto", "aes128", "aes192", "aes256")
   val equivalentZip = List("ZipCrypto", "AES128", "AES192", "AES256") //probably not necessary
   List(s"-mem=$mode") //add checking

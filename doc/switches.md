@@ -42,9 +42,9 @@ The supported modes are:
 
 
 ```scala
-def setEncryption(mode: String): List[String]
+def setZipEncryption(mode: String): List[String]
 ```
-Sets the encryption algo to use.
+Sets the encryption algo to use. This is only supported for zip archives.
 
 The supported modes are:
 * zipcrypto

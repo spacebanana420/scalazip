@@ -16,3 +16,8 @@ Parses the info list as obtained from the function above and gets the general ar
 def parseFileAttributes(info: List[String]): List[List[String]]
 ```
 Parses the info list and returns a matrix containing the original and compressed size of each file in the archive.
+
+```scala
+def isFileinArchive(info: List[String], name: String, filesinfo: List[List[String]] = getFilesInfo(info), i: Int = 0): Boolean
+```
+Checks if the file whose path contains ```name``` exists in the archive respective to the info list you give.

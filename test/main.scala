@@ -14,7 +14,7 @@ import scalazip.*
 // }
 
 def create1() = {
-  println("Creating archive.7z\n")
+  print("---Creating archive.7z---")
   val options =
     setThreads(0)
     ++ setCompressionLevel(3)
@@ -22,30 +22,30 @@ def create1() = {
     ++ setPassword("ilovedoremy")
   val files = List[String]("froge.png", "Ayumudromeda 2.png", "src/archive.scala")
   createArchive("archive.7z", files, options)
-  println("args: \n")
+  print("args: \n")
   for arg <- options ++ files do {
     print(s"$arg ")
   }
 }
 
 def renametheshit () = { //does not work, can only rename files
-  println("Attempting to rename the src folder")
+  print("---Attempting to rename the src folder---")
   renamePaths("archive.7z", List("src/"), List("sauce/"), setPassword("ilovedoremy"))
 }
 
 def info1 () = {
-  println("\nReading archive.7z\n")
   val infoList = getInfo("archive.7z", "ilovedoremy")
   val archiveInfo = parseArchiveInfo(infoList)
   val filesInfo = parseFileAttributes(infoList)
+  print("---Reading archive.7z---")
   for info <- archiveInfo do {
     println(info)
   }
-  println("Reading file attributes\n")
+  println("---Reading file attributes---")
   for file <- filesInfo do {
     for info <- file do {
-      print(s"$info ")
+      println(s"$info ")
     }
-    println()
+    //print("\n\n")
   }
 }

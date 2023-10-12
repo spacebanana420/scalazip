@@ -50,12 +50,14 @@ def renamePaths(name: String, files: List[String], newnames: List[String], optio
     List[String](exec, "rn", name) ++ getMainArgs() ++ options ++ renameList
 }
 
+//def validateArchive()
+
 def checkFor7z(execpath: String = "7z"): Boolean = {
   try {List(execpath, "-y", "-bso0", "-bse0", "-bsp0").!; true}
   catch {case e: Exception => false}
 }
 
-def addDir(dir: String): List[String] = {
+def addDir(dir: String): List[String] = { //remember to remove or rework later
     val absolute =
       if dir != "." then
         File(dir).getAbsolutePath()
