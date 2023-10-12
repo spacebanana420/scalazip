@@ -30,8 +30,6 @@ def isFileinArchive(info: List[String], name: String, i: Int = 0): Boolean = {
 
 //def hash archive (h command)
 
-//def find file in archive
-
 private def addInfoToList(info: String, line: String = "", list: List[String] = List(), i: Int = 0): List[String] = {
   if i == info.length then
     if line != "" then //is this necessary?

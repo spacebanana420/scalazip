@@ -30,7 +30,7 @@ Disables compression. Under the hood it just executes ```setCompressionLevel(0)`
 def setCompression(mode: String): List[String]
 ```
 
-Sets the compression mode.
+Sets the compression mode. This is only supported for zip archives. If an unsupported mode is given, it will default to ```deflate```
 
 The supported modes are:
 * copy (no compression)
@@ -44,7 +44,7 @@ The supported modes are:
 ```scala
 def setZipEncryption(mode: String): List[String]
 ```
-Sets the encryption algo to use. This is only supported for zip archives.
+Sets the encryption algo to use. This is only supported for zip archives. If an unsupported mode is given, it will default to ```aes256```
 
 The supported modes are:
 * zipcrypto

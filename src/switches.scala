@@ -33,15 +33,19 @@ def setCompressionLevel(level: Byte): List[String] = {
 def disableCompression(): List[String] = setCompressionLevel(0)
 
 def setCompression(mode: String): List[String] = {
-  val modesZip = List("copy", "deflate", "deflate64", "bzip2", "lzma", "ppmd")
-  val equivalentZip = List("Copy", "Deflate", "Deflate64", "BZip2", "LZMA", "PPMd") //probably not necessary
-  List(s"-mm=$mode") //add checking
+  val supportedModes = List("copy", "deflate", "deflate64", "bzip2", "lzma", "ppmd")
+  if belongsToList(mode, supportedModes) == true then
+    List(s"-mm=$mode")
+  else
+    List(s"-mm=deflate")
 }
 
 def setZipEncryption(mode: String): List[String] = {
-  val modesZip = List("zipcrypto", "aes128", "aes192", "aes256")
-  val equivalentZip = List("ZipCrypto", "AES128", "AES192", "AES256") //probably not necessary
-  List(s"-mem=$mode") //add checking
+  val supportedModes = List("zipcrypto", "aes128", "aes192", "aes256")
+  if belongsToList(mode, supportedModes) == true then
+    List(s"-mem=$mode")
+  else
+    List(s"-mem=aes256")
 }
 
 def encryptHeader(): List[String] = List("-mhe=on")
@@ -76,4 +80,13 @@ def setOutputDirectory(dir: String): List[String] = { //implement * better later
     List(s"-o$dir")
   else
     List()
+}
+
+private def belongsToList(mode: String, modes: List[String], i: Int = 0): Boolean = {
+  if i == modes.length then
+    false
+  else if mode == modes(i) then
+    true
+  else
+    belongsToList(mode, modes, i+1)
 }
