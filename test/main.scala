@@ -7,6 +7,7 @@ import scalazip.*
 @main def main() = {
   //create1()
   info1()
+  getfiledata()
   //renametheshit()
 }
 
@@ -25,6 +26,16 @@ def create1() = {
   print("args: \n")
   for arg <- options ++ files do {
     print(s"$arg ")
+  }
+}
+
+def getfiledata() = {
+  print("---Retrieving File data---\n\n")
+  val options = setPassword("ilovedoremy")
+  val files = List("froge.png", "src/archive.scala", "archive.scala") //third one wrong on purpose
+  val filedata = retrieveFileData("archive.7z", files, options)
+  for data <- filedata do {
+    print(s"${data}\n")
   }
 }
 

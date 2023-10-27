@@ -3,7 +3,7 @@ package scalazip
 import java.io.File
 import scala.sys.process.*
 
-//The main file that contains mostly the final functions to execute 7z with
+//The main file that contains the major functions that call 7zip
 
 private def getMainArgs(): List[String] = List("-y", "-bso0", "-bse0", "-bsp0", "-r")
 
@@ -53,8 +53,11 @@ def renamePaths(name: String, files: List[String], newnames: List[String], optio
 //def validateArchive()
 
 def checkFor7z(execpath: String = "7z"): Boolean = {
-  try {List(execpath, "-y", "-bso0", "-bse0", "-bsp0").!; true}
-  catch {case e: Exception => false}
+  try
+    List(execpath, "-bso0", "-bse0", "-bsp0").!
+    true
+  catch
+    case e: Exception => false
 }
 
 def retrieveFileData(name: String, files: List[String], options: List[String], exec: String = "7z", filedata: List[String] = List(), i: Int = 0): List[String] = {
