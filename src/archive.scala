@@ -19,7 +19,7 @@ def createArchive(name: String, files: List[String], options: List[String], exec
   command.!
 }
 
-def extractArchive(name: String, options: List[String], keepPaths = true, exec: String = "7z") = {
+def extractArchive(name: String, options: List[String], keepPaths: Boolean = true, exec: String = "7z") = {
   val extractMode =
     if keepPaths == true then
       "x"
@@ -29,7 +29,7 @@ def extractArchive(name: String, options: List[String], keepPaths = true, exec: 
   command.!
 }
 
-def extractFiles(name: String, files: List[String], options: List[String], keepPaths = true, exec: String = "7z") = {
+def extractFiles(name: String, files: List[String], options: List[String], keepPaths: Boolean = true, exec: String = "7z") = {
   val extractMode =
     if keepPaths == true then
       "x"
