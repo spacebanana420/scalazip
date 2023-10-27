@@ -14,26 +14,28 @@ private def combineNameLists(oldnames: List[String], newnames: List[String], com
     combineNameLists(oldnames, newnames, combined :+ oldnames(i) :+ newnames(i), i+1)
 }
 
-def createArchive(name: String, files: List[String], options: List[String], exec: String = "7z") = { 
+def createArchive(name: String, files: List[String], options: List[String], exec: String = "7z") = {
   val command = List[String](exec, "a", name) ++ getMainArgs() ++ options ++ files
   command.!
 }
 
-def extractFiles(name: String, files: List[String], options: List[String], outDir: String = "", exec: String = "7z") = {
-  val command =
-  if outDir == "" || File(outDir).isDirectory() == false then
-    List[String](exec, "e", name) ++ getMainArgs() ++ options ++ files
-  else
-    List[String](exec, "e", name, s"-o$outDir") ++ getMainArgs() ++ options ++ files
+def extractArchive(name: String, options: List[String], keepPaths = true, exec: String = "7z") = {
+  val extractMode =
+    if keepPaths == true then
+      "x"
+    else
+      "e"
+  val command = List[String](exec, extractMode, name) ++ getMainArgs() ++ options
   command.!
 }
 
-def extractArchive(name: String, options: List[String], outDir: String = "", exec: String = "7z") = {
-  val command =
-  if outDir == "" || File(outDir).isDirectory() == false then
-    List[String](exec, "e", name) ++ getMainArgs() ++ options
-  else
-    List[String](exec, "e", name, s"-o$outDir") ++ getMainArgs() ++ options
+def extractFiles(name: String, files: List[String], options: List[String], keepPaths = true, exec: String = "7z") = {
+  val extractMode =
+    if keepPaths == true then
+      "x"
+    else
+      "e"
+  val command = List[String](exec, extractMode, name) ++ getMainArgs() ++ options ++ files
   command.!
 }
 
@@ -53,6 +55,15 @@ def renamePaths(name: String, files: List[String], newnames: List[String], optio
 def checkFor7z(execpath: String = "7z"): Boolean = {
   try {List(execpath, "-y", "-bso0", "-bse0", "-bsp0").!; true}
   catch {case e: Exception => false}
+}
+
+def retrieveFileData(name: String, files: List[String], options: List[String], exec: String = "7z", filedata: List[String] = List(), i: Int = 0): List[String] = {
+  if i == files.length then
+    filedata
+  else
+    val command = List[String](exec, "x", name, "-so") ++ getMainArgs() ++ options :+ files(i) //optimise
+    val data = command.!!
+    retrieveFileData(name, files, options, exec, filedata :+ data, i+1)
 }
 
 // def addDir(dir: String): List[String] = { //remember to remove or rework later

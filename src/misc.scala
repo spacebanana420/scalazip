@@ -2,6 +2,8 @@ package scalazip
 
 import java.io.File
 
+//General functions that the library uses but can also be useful to you
+
 def addFiles(dir: String, exclude: List[String] = List()): List[String] = {
   val files =
     if exclude.length == 0 then
@@ -11,12 +13,36 @@ def addFiles(dir: String, exclude: List[String] = List()): List[String] = {
   files.toList
 }
 
-//this is in reader.scala too, merge them later
-private def belongsToList(name: String, exclude: List[String], i: Int = 0): Boolean = {
-  if i == exclude.length then
+def belongsToList(name: String, strlist: List[String], i: Int = 0): Boolean = {
+  if i == strlist.length then
     false
-  else if name == exclude(i) then
+  else if name == strlist(i) then
     true
   else
-    belongsToList(name, exclude, i+1)
+    belongsToList(name, strlist, i+1)
+}
+
+def convertListInt(strs: List[String], finallist: List[String | Int] = List(), i: Int = 0): List[String | Int] = {
+  if i == strs.length then
+    finallist
+  else
+    try
+      convertListInt(strs, finallist :+ strs(i).toInt, i+1)
+    catch
+      case e: Exception => convertListInt(strs, finallist :+ strs(i), i+1)
+}
+
+def convertListNumbers(strs: List[String], finallist: List[String | Int | Long] = List(), i: Int = 0): List[String | Int | Long] = {
+  if i == strs.length then
+    finallist
+  else
+    try
+      val numint = strs(i).toInt
+      val numlong = strs(i).toLong
+      if numint == numlong then
+        convertListNumbers(strs, finallist :+ numint, i+1)
+      else
+        convertListNumbers(strs, finallist :+ numlong, i+1)
+    catch
+      case e: Exception => convertListNumbers(strs, finallist :+ strs(i), i+1)
 }

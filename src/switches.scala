@@ -80,12 +80,3 @@ def setOutputDirectory(dir: String): List[String] = { //implement * better later
   else
     List()
 }
-
-private def belongsToList(mode: String, modes: List[String], i: Int = 0): Boolean = {
-  if i == modes.length then
-    false
-  else if mode == modes(i) then
-    true
-  else
-    belongsToList(mode, modes, i+1)
-}

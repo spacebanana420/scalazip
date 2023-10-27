@@ -5,9 +5,9 @@ import scalazip.*
 //Additional files I use to test and add to archives are not included in the project
 
 @main def main() = {
-  create1()
+  //create1()
   info1()
-  renametheshit()
+  //renametheshit()
 }
 
 // def extract1() = {
@@ -35,17 +35,17 @@ def renametheshit () = { //does not work, can only rename files
 
 def info1 () = {
   val infoList = getInfo("archive.7z", "ilovedoremy")
-  val archiveInfo = parseArchiveInfo(infoList)
-  val filesInfo = parseFileAttributes(infoList)
-  print("---Reading archive.7z---")
+  val archiveInfo = getArchiveInfo(infoList)
+  val filesInfo = getFilesInfo(infoList)
+  println("---Reading archive.7z---")
   for info <- archiveInfo do {
     println(info)
   }
-  println("---Reading file attributes---")
+  println(s"---Reading file attributes (length: ${filesInfo.length})---")
   for file <- filesInfo do {
     for info <- file do {
       println(s"$info ")
     }
-    //print("\n\n")
+    println("--------")
   }
 }

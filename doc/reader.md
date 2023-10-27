@@ -8,14 +8,19 @@ This returns the stdout of 7zip packed into a list, containing all the useful in
 The list it returns is required for the rest of the functions here.
 
 ```scala
-def parseArchiveInfo(info: List[String]): List[String]
+def getArchiveInfo(info: List[String], newlist: List[String] = List(), i: Int = 4): List[String]
 ```
 Parses the info list as obtained from the function above and gets the general archive information.
 
 ```scala
-def parseFileAttributes(info: List[String]): List[List[String]]
+def getFilesInfo(info: List[String], filesinfo: List[List[String]] = List(), fileinfo: List[String] = List(), i: Int = 13): List[List[String]]
 ```
 Parses the info list and returns a matrix containing the original and compressed size of each file in the archive.
+
+```scala
+def getArchiveValues(info: List[String]): List[String | Int | Long]
+```
+Same as ```getArchiveInfo``` but number strings are converted to ints or longs
 
 ```scala
 def isFileinArchive(info: List[String], name: String, i: Int = 0): Boolean
