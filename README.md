@@ -47,6 +47,6 @@ Download the library files in ```src``` and add them to your project however you
 
 Documentation for the library's functions is located in the ```doc``` directory. The documentation is still a work-in-progress.
 
-* [Archive](https://github.com/spacebanana420/scalazip/tree/main/doc/archive.md): The main functions of Scalazip, for creation and extraction of archives as well as other functions.
+* [Archive](https://github.com/spacebanana420/scalazip/tree/main/doc/archive.md) The main functions of Scalazip, for creation and extraction of archives as well as other functions.
 * [Switches](https://github.com/spacebanana420/scalazip/tree/main/doc/switches.md) The functions that return the command line arguments for 7zip.
 * [Reader](https://github.com/spacebanana420/scalazip/tree/main/doc/reader.md) Functions related to parsing file information.

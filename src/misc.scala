@@ -46,3 +46,10 @@ def convertListNumbers(strs: List[String], finallist: List[String | Int | Long] 
     catch
       case e: Exception => convertListNumbers(strs, finallist :+ strs(i), i+1)
 }
+
+def extractSubstring(str: String, i: Int, end: Int, substr: String = ""): String = {
+  if i >= str.length || (i >= end && i > -1) then
+    substr
+  else
+    extractSubstring(str, i+1, end, substr + str(i))
+}

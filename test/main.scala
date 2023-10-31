@@ -8,6 +8,7 @@ import scalazip.*
   //create1()
   info1()
   getfiledata()
+  hashfiles()
   //renametheshit()
 }
 
@@ -58,5 +59,13 @@ def info1 () = {
       println(s"$info ")
     }
     println("--------")
+  }
+}
+
+def hashfiles() = {
+  print("---Hashing file shits---\n")
+  val archiveinfo = hashArchiveFiles("archive.7z", List("froge.png", "src/archive.scala", "wrongonpurpose"), "crc32", "ilovedoremy")
+  for info <- archiveinfo do {
+    print(s"$info\n")
   }
 }

@@ -20,3 +20,8 @@ Converts a string list into a list containing strings or ints. Any strings that 
 def convertListNumbers(strs: List[String], finallist: List[String | Int | Long] = List(), i: Int = 0): List[String | Int | Long]
 ```
 Converts a string list into a list containing strings, ints or longs. Any strings that represent integer numbers will be converted to ints, and strings that represent long numbers will be converted to longs.
+
+```scala
+def extractSubstring(str: String, i: Int, end: Int, substr: String = ""): String
+```
+Gets the substring from the string ```str``` that is located at the start of``` i``` and ends at ```end``` positions.

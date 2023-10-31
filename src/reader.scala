@@ -45,8 +45,10 @@ def getArchiveValues(info: List[String]): List[String | Int | Long] = {
 // }
 
 def isFileinArchive(info: List[String], name: String, i: Int = 0): Boolean = {
-  val filesinfo = getFilesInfo(info)
-  findFile(filesinfo, name)
+  if info(1).contains("Listing archive:") == true then
+    findFile(getFilesInfo(info), name)
+  else
+    findElement(info, name)
 }
 
 //def hash archive (h command)
@@ -72,6 +74,15 @@ private def findFile(filesinfo: List[List[String]], name: String, i: Int = 0): B
     findFile(filesinfo, name, i+1)
 }
 
+private def findElement(info: List[String], name: String, i: Int = 0): Boolean = {
+  if i == info.length then
+    false
+  else if info(i).contains(name) == true then
+    true
+  else
+    findElement(info, name, i+1)
+}
+
 private def getLineValue(line: String, value: String = "", copy: Boolean = false, i: Int = 0): String = {
   if i == line.length then
     value
@@ -82,3 +93,57 @@ private def getLineValue(line: String, value: String = "", copy: Boolean = false
   else
     getLineValue(line, value, copy, i+1)
 }
+
+
+// def hashFile(): List[String] = {
+// }
+
+def hashArchiveFiles(archive: String, files: List[String], mode: String, password: String = "", exec: String = "7z"): List[String] = {
+  val modes = List("crc32", "crc64", "sha1", "sha256", "blake2sp")
+  val modearg =
+    if belongsToList(mode, modes) == true then
+      s"-scrc$mode"
+    else
+      "-scrccrc32"
+  val cmd =
+    if password == "" then
+      List(exec, "h", "-r", modearg, archive) ++ files
+    else
+      List(exec, "h", "-r", s"-p$password", modearg, archive) ++ files
+  val info = addInfoToList(cmd.!!)
+  val trueFiles = files.filter(x => findElement(info, x) == true)
+  val hashes = getInfoHashes(info, trueFiles.length)
+  hashes
+  //val infopositions = findInfoPositions(info(8))
+  //getFilesHash(info, infopositions(0), infopositions(1))
+}
+
+private def getInfoHashes(info: List[String], amount: Int, list: List[String] = List(), i: Int = 9): List[String] = {
+  if i == info.length || i-9 == amount then
+    list :+ info(i)
+  else
+    getInfoHashes(info, amount, list :+ info(i), i+1)
+}
+
+// private def getFilesHash(info: List[String], hashend: Int, namestart: Int, filesinfo: List[List[String]] = List(), i: Int = 9): List[List[String]] = {
+//   if i == info.length || info(i) == "--------" then
+//     if info.length != 0 then
+//       filesinfo :+ info
+//     else
+//       filesinfo
+//   else
+//     val hashinfo = List(extractSubstring(info(i), namestart, -1), extractSubstring(info(i), 0, hashend)) //test!!!!!!!
+//     getFilesHash(info, hashend, namestart, filesinfo :+ hashinfo, i+1)
+// }
+//
+// private def findInfoPositions(line: String, current: Int = 0, endhash: Int = 0, startname: Int = 0, i: Int = 0): List[Int] = {
+//   if i >= line.length then
+//     List(endhash, startname)
+//   else if line(i) == ' ' then
+//     findInfoPositions(line, current+1, endhash, startname, i+1)
+//   else
+//     current match
+//       case 0 => findInfoPositions(line, current, endhash+1, startname, i+1)
+//       case 2 => findInfoPositions(line, current, endhash, startname+1, i+1)
+//       case _ => findInfoPositions(line, current, endhash, startname, i+1)
+// }

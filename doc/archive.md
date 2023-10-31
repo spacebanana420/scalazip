@@ -45,3 +45,8 @@ Checks if 7z exists in the path ```execpath```
 def retrieveFileData(name: String, files: List[String], options: List[String], exec: String = "7z", filedata: List[String] = List(), i: Int = 0): List[String]
 ```
 Reads the bytes of each file in ```files```, belonging to the archive ```name```, as string characters and puts them in a list by the order they are read. The use of ```options``` here is not necessary except for specific use-cases like trying to read an encrypted archive.
+
+```scala
+def retrieveFileBytes(name: String, files: List[String], options: List[String], exec: String = "7z"): List[List[Byte]]
+```
+Similar to ```retrieveFileData```, but it returns a byte matrix, where each byte array corresponds to each file data string.

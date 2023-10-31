@@ -68,21 +68,25 @@ def retrieveFileData(name: String, files: List[String], options: List[String], e
     val data = command.!!
     retrieveFileData(name, files, options, exec, filedata :+ data, i+1)
 }
+//probably only works with ascii and utf8
+def retrieveFileBytes(name: String, files: List[String], options: List[String], exec: String = "7z"): List[List[Byte]] = {
+  val filedata = retrieveFileData(name, files, options, exec)
+  convertFileStrings(filedata)
+}
 
-// def addDir(dir: String): List[String] = { //remember to remove or rework later
-//     val absolute =
-//       if dir != "." then
-//         File(dir).getAbsolutePath()
-//       else
-//         File("").getAbsolutePath()
-//     val dirChar =
-//       if absolute.contains("/") == true then
-//         '/'
-//       else
-//         '\\'
-//     val absoluteFiles = File(dir).list().map(x => absolute + dirChar + x)
-//     absoluteFiles.toList
-// }
+private def convertFileStrings(files: List[String], bytes: List[List[Byte]] = List(), i: Int = 0): List[List[Byte]] = {
+  if i == files.length then
+    bytes
+  else
+    convertFileStrings(files, bytes :+ dataToBytes(files(i)), i+1)
+}
+
+private def dataToBytes(file: String, bytes: List[Byte] = List(), i: Int = 0): List[Byte] = {
+  if i == file.length then
+    bytes
+  else
+    dataToBytes(file, bytes :+ file(0).toByte, i+1)
+}
 
 // private def hasDirs(paths: List[String], i: Int = 0): Boolean = {
 //   if i == paths.length then
@@ -102,9 +106,4 @@ def checkSupport(name: String, fmts: List[String] = List(".7z", ".bz2", ".gz", "
     checkSupport(name, fmts, i+1)
 }
 
-// def addFile(name: String, files: List[String]): List[String] = {
-//   if File(name).isFile() == true then
-//     files :+ name
-//   else
-//     files
-// }
+
