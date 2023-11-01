@@ -97,7 +97,7 @@ private def getLineValue(line: String, value: String = "", copy: Boolean = false
 // def hashFile(): List[String] = {
 // }
 
-def hashArchiveFiles(archive: String, files: List[String], mode: String, password: String = "", exec: String = "7z"): List[String] = {
+def hashArchive(archive: String, files: List[String], mode: String, password: String = "", exec: String = "7z"): List[String] = {
   val modes = List("crc32", "crc64", "sha1", "sha256", "blake2sp")
   val modearg =
     if belongsToList(mode, modes) == true then

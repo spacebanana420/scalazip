@@ -28,7 +28,7 @@ def isFileinArchive(info: List[String], name: String, i: Int = 0): Boolean
 Checks if the file whose path contains ```name``` exists in the archive respective to the info list you give.
 
 ```scala
-def hashArchiveFiles(archive: String, files: List[String], mode: String, password: String = "", exec: String = "7z"): List[String]
+def hashArchive(archive: String, files: List[String], mode: String, password: String = "", exec: String = "7z"): List[String]
 ```
 Gets the hashes for the ```files``` that are in ```archive```, as well as the archive's hash. You can choose different hashing algorithms, default is crc32.
 
