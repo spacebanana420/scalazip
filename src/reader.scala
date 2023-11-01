@@ -1,6 +1,7 @@
 package scalazip
 
 import scala.sys.process.*
+import java.io.File
 
 //This code lets the user read and parse archive info
 // Some indexes "i" start/increment/etc at a unique value because the stdout structure of 7z's "l" command is fixed and predictable
@@ -50,8 +51,6 @@ def isFileinArchive(info: List[String], name: String, i: Int = 0): Boolean = {
   else
     findElement(info, name)
 }
-
-//def hash archive (h command)
 
 private def addInfoToList(info: String, line: String = "", list: List[String] = List(), i: Int = 0): List[String] = {
   if i == info.length then
@@ -112,6 +111,26 @@ def hashArchiveFiles(archive: String, files: List[String], mode: String, passwor
       List(exec, "h", "-r", s"-p$password", modearg, archive) ++ files
   val info = addInfoToList(cmd.!!)
   val trueFiles = files.filter(x => findElement(info, x) == true)
+  val hashes = getInfoHashes(info, trueFiles.length)
+  hashes
+  //val infopositions = findInfoPositions(info(8))
+  //getFilesHash(info, infopositions(0), infopositions(1))
+}
+
+def hashFiles(files: List[String], mode: String, password: String = "", exec: String = "7z"): List[String] = {
+  val modes = List("crc32", "crc64", "sha1", "sha256", "blake2sp")
+  val modearg =
+    if belongsToList(mode, modes) == true then
+      s"-scrc$mode"
+    else
+      "-scrccrc32"
+  val cmd =
+    if password == "" then
+      List(exec, "h", "-r", modearg) ++ files
+    else
+      List(exec, "h", "-r", s"-p$password", modearg) ++ files
+  val info = addInfoToList(cmd.!!)
+  val trueFiles = files.filter(x => File(x).isFile() == true)
   val hashes = getInfoHashes(info, trueFiles.length)
   hashes
   //val infopositions = findInfoPositions(info(8))

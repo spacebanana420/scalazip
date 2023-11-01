@@ -38,3 +38,15 @@ Supported algorithms:
 * sha1
 * sha256
 * blake2sp
+
+```scala
+def hashFiles(archive: String, files: List[String], mode: String, password: String = "", exec: String = "7z"): List[String]
+```
+Gets the hashes for the files ```files```. You can choose different hashing algorithms, default is crc32.
+
+Supported algorithms:
+* crc32
+* crc64
+* sha1
+* sha256
+* blake2sp
