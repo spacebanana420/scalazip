@@ -1,4 +1,4 @@
-package scalazip
+package scalazip.misc
 
 import java.io.File
 
@@ -13,7 +13,7 @@ def addFiles(dir: String, exclude: List[String] = List()): List[String] = {
   files.toList
 }
 
-def belongsToList(name: String, strlist: List[String], i: Int = 0): Boolean = {
+def belongsToList(name: String, strlist: Seq[String], i: Int = 0): Boolean = {
   if i == strlist.length then
     false
   else if name == strlist(i) then

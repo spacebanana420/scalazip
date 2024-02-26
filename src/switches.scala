@@ -1,5 +1,6 @@
 package scalazip
 
+import scalazip.misc.*
 import java.io.File
 
 //This part is dedicated to 7z's arguments (switches)

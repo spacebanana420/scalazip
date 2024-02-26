@@ -1,5 +1,6 @@
 package scalazip
 
+import scalazip.misc.*
 import scala.sys.process.*
 import java.io.File
 

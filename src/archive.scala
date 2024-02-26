@@ -1,5 +1,6 @@
 package scalazip
 
+import scalazip.misc.*
 import java.io.File
 import scala.sys.process.*
 
@@ -21,20 +22,14 @@ def createArchive(name: String, files: List[String], options: List[String], exec
 
 def extractArchive(name: String, options: List[String], keepPaths: Boolean = true, exec: String = "7z") = {
   val extractMode =
-    if keepPaths == true then
-      "x"
-    else
-      "e"
+    if keepPaths then "x" else "e"
   val command = List[String](exec, extractMode, name) ++ getMainArgs() ++ options
   command.!
 }
 
 def extractFiles(name: String, files: List[String], options: List[String], keepPaths: Boolean = true, exec: String = "7z") = {
   val extractMode =
-    if keepPaths == true then
-      "x"
-    else
-      "e"
+    if keepPaths then "x" else "e"
   val command = List[String](exec, extractMode, name) ++ getMainArgs() ++ options ++ files
   command.!
 }
@@ -54,8 +49,9 @@ def renamePaths(name: String, files: List[String], newnames: List[String], optio
 
 def checkFor7z(execpath: String = "7z"): Boolean = {
   try
-    List(execpath, "-bso0", "-bse0", "-bsp0").!
-    true
+    if List(execpath, "-bso0", "-bse0", "-bsp0").! == 0 then
+      true
+    else false
   catch
     case e: Exception => false
 }
@@ -97,8 +93,8 @@ private def dataToBytes(file: String, bytes: List[Byte] = List(), i: Int = 0): L
 //     hasDirs(paths, i+1)
 // }
 
-def checkSupport(name: String, fmts: List[String] = List(".7z", ".bz2", ".gz", ".tar", ".zip", ".xz", ".wim"), i: Int = 0): Boolean = {
- if i == fmts.length then
+def checkSupport(name: String, fmts: Seq[String] = Vector(".7z", ".bz2", ".gz", ".tar", ".zip", ".xz", ".wim"), i: Int = 0): Boolean = {
+ if i >= fmts.length then
     false
   else if name.contains(fmts(i)) then
     true
